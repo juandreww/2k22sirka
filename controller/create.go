@@ -13,8 +13,7 @@ import (
 func create() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodGet {
-			uid := r.URL.Query().Get("uid")
-			data, err := model.ReadSelected(uid)
+			data, err := model.DisplayAllUsers()
 			if err != nil {
 				w.Write([]byte(err.Error()))
 			}

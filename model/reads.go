@@ -8,7 +8,7 @@ import (
 	// "database/sql"
 )
 
-func ReadAll() ([]views.Users, error) {
+func DisplayAllUsers() ([]views.Users, error) {
 	rows, err := con.Query("SELECT userid, name FROM trnkelapabakar")
 	if err != nil {
 		log.Fatal(err)
@@ -45,7 +45,7 @@ func ReadSelected(uid string) ([]views.Users, error) {
 	for rows.Next() {
 		data := views.Users{}
 		
-		rows.Scan(&data.Type2, &data.Quantity)
+		rows.Scan(&data.Userid, &data.Name)
 		coconut = append(coconut, data)
 	}
 	
