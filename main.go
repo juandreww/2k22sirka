@@ -6,8 +6,8 @@ import (
 	// "encoding/json"
 	"2k22sirka/controller"
 	"2k22sirka/model"
-	// "log"
-	// "os"
+	"log"
+	"os"
 )
 
 func main() {
@@ -17,9 +17,9 @@ func main() {
 	
 	fmt.Println("Serving...");
 	// for heroku
-	// port := os.Getenv("PORT")
-	// log.Fatal(http.ListenAndServe(":"+port, mux))
+	port := os.Getenv("PORT")
+	log.Fatal(http.ListenAndServe(":"+port, mux))
 
 	// for Local
-	http.ListenAndServe(":80", mux)
+	// http.ListenAndServe(":80", mux)
 }
