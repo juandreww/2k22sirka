@@ -8,37 +8,28 @@ import (
 	// "database/sql"
 )
 
-func ReadAll() ([]views.Kelapa, error) {
-	rows, err := con.Query("SELECT type2, quantity FROM trnkelapabakar")
+func ReadAll() ([]views.Users, error) {
+	rows, err := con.Query("SELECT userid, name FROM trnkelapabakar")
 	if err != nil {
-		fmt.Println("ya")
 		log.Fatal(err)
 	}
 	defer rows.Close()
 	
-	coconut := []views.Kelapa{}
-	i := 0;
-	fmt.Println("wdaw")
+	people := []views.Users{}
 	for rows.Next() {
-		kelapa := views.Kelapa{}
-		if i == 5 {
-			break;
-		}
+		users := views.Users{}
 		
-		if err := rows.Scan(&kelapa.Type2, &kelapa.Quantity); err != nil {
+		if err := rows.Scan(&users.Userid, &users.Name); err != nil {
             log.Fatal(err)
         }
 
-		fmt.Printf("hey %s you %.2f\n", kelapa.Type2, kelapa.Quantity)
-		i++
+		fmt.Printf("hey %s you %.2f\n", users.Userid, users.Name)
 	}
 	
-	fmt.Println("CreateKelapa here...")
-	
-	return coconut, nil
+	return people, nil
 }
 
-func ReadSelected(uid string) ([]views.Kelapa, error) {
+func ReadSelected(uid string) ([]views.Users, error) {
 	rows, err := con.Query("SELECT type2, quantity FROM trnkelapabakar WHERE uid = ($1)::uuid", uid)
 	
 	if rows == nil {
@@ -48,11 +39,11 @@ func ReadSelected(uid string) ([]views.Kelapa, error) {
 		return nil, err
 	} 
 	
-	coconut := []views.Kelapa{}
+	coconut := []views.Users{}
 	// spew.Dump(coconut)
 	
 	for rows.Next() {
-		data := views.Kelapa{}
+		data := views.Users{}
 		
 		rows.Scan(&data.Type2, &data.Quantity)
 		coconut = append(coconut, data)
