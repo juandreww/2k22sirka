@@ -12,5 +12,5 @@ type Kelapa struct {
 
 type Users struct {
 	Userid string `json:"userid"`
-	Name float64 `json:"name"`
+	Name string `json:"name"`
 }

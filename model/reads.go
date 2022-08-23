@@ -9,7 +9,7 @@ import (
 )
 
 func DisplayAllUsers() ([]views.Users, error) {
-	rows, err := con.Query("SELECT userid, name FROM trnkelapabakar")
+	rows, err := con.Query("SELECT userid, name FROM users")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -23,7 +23,7 @@ func DisplayAllUsers() ([]views.Users, error) {
             log.Fatal(err)
         }
 
-		fmt.Printf("hey %s you %.2f\n", users.Userid, users.Name)
+		fmt.Printf("hey %s you %s\n", users.Userid, users.Name)
 	}
 	
 	return people, nil
