@@ -30,7 +30,7 @@ func DisplayAllUsers() ([]views.Users, error) {
 }
 
 func ReadSelected(uid string) ([]views.Users, error) {
-	rows, err := con.Query("SELECT type2, quantity FROM trnkelapabakar WHERE uid = ($1)::uuid", uid)
+	rows, err := con.Query("SELECT type2, quantity FROM users WHERE uid = ($1)::uuid", uid)
 	
 	if rows == nil {
 		fmt.Println("No rows returned")
@@ -39,17 +39,14 @@ func ReadSelected(uid string) ([]views.Users, error) {
 		return nil, err
 	} 
 	
-	coconut := []views.Users{}
-	// spew.Dump(coconut)
+	people := []views.Users{}
 	
 	for rows.Next() {
 		data := views.Users{}
 		
 		rows.Scan(&data.Userid, &data.Name)
-		coconut = append(coconut, data)
+		people = append(people, data)
 	}
 	
-	fmt.Println("CreateKelapa here...")
-	
-	return coconut, nil
+	return people, nil
 }
