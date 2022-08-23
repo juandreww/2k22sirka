@@ -26,8 +26,8 @@ func DisplayAllUsers() ([]views.Users, error) {
 	return people, nil
 }
 
-func ReadSelected(uid string) ([]views.Users, error) {
-	rows, err := con.Query("SELECT type2, quantity FROM users WHERE uid = ($1)::uuid", uid)
+func DisplayUser(userid string) ([]views.Users, error) {
+	rows, err := con.Query("SELECT type2, quantity FROM users WHERE userid = ($1)", userid)
 	
 	if rows == nil {
 		fmt.Println("No rows returned")

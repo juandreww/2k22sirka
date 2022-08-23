@@ -19,6 +19,14 @@ func create() http.HandlerFunc {
 			}
 			w.WriteHeader(http.StatusOK)
 			json.NewEncoder(w).Encode(data)
+		} else if r.Method == http.MethodPost {
+			userid := r.URL.Query().Get("Userid")
+			data, err := model.DisplayUser(userid)
+			if err != nil {
+				w.Write([]byte(err.Error()))
+			}
+			w.WriteHeader(http.StatusOK)
+			json.NewEncoder(w).Encode(data)
 		}
 	}
 }
