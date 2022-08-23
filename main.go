@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"encoding/json"
-	"2k22sirka/structs"
+	"2k22sirka/views"
 )
 
 func main() {
