@@ -3,23 +3,23 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"encoding/json"
-	"2k22sirka/views"
+	// "encoding/json"
+	"2k22sirka/controller"
+	"2k22sirka/model"
+	// "log"
+	// "os"
 )
 
 func main() {
-	mux := http.NewServeMux()
-	mux.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
-		if r.Method == http.MethodGet {
-			data := views.Response {
-				Code: http.StatusOK,
-				Body: "pong",
-			}
-			json.NewEncoder(w).Encode(data)
-		}
-	})
-	// defer db.Close()
+	mux := controller.RegisterApi()
+	db := model.ConnectDB()
+	defer db.Close()
 	
 	fmt.Println("Serving...");
+	// for heroku
+	// port := os.Getenv("PORT")
+	// log.Fatal(http.ListenAndServe(":"+port, mux))
+
+	// for Local
 	http.ListenAndServe(":80", mux)
 }
