@@ -19,11 +19,8 @@ func DisplayAllUsers() ([]views.Users, error) {
 	for rows.Next() {
 		users := views.Users{}
 		
-		if err := rows.Scan(&users.Userid, &users.Name); err != nil {
-            log.Fatal(err)
-        }
-
-		fmt.Printf("hey %s you %s\n", users.Userid, users.Name)
+		rows.Scan(&users.Userid, &users.Name)
+		people = append(people, users)
 	}
 	
 	return people, nil
